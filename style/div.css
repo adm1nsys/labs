@@ -1,0 +1,10 @@
+div {
+	border: 1px solid red;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/display */
+	display: block;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/flex */
+	flex: content;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/position */
+	position: absolute;
+	top: 0px;
+}

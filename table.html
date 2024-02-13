@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>МЗ-21 лекция 2 CSS</title>
+		<meta name="keywords" content="HTML CSS">
+		<meta name="description" content="HMTL CSS">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<style>
+			th, td {
+				padding: 3px 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="index.html">index</a><br>
+		<hr>
+		<!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table -->
+		<table border="1">
+			<caption>First Table </caption>
+			text text 1
+			<!-- table row -->
+			<tr>
+				text test 2
+				<!-- table header -->
+				<th> C0 R0 </th>
+				<th> C1 R0 </th>
+				<th> C2 R0 </th>
+			</tr>
+			<!-- table row -->
+			<tr>
+				<!-- table data -->
+				<td> C0 R1 </td>
+				<td> C1 R1 </td>
+				<td> C2 R1 </td>
+			</tr>
+		</table>
+		<hr>
+		<table border="1">
+			<tr>
+				<td>
+					<table border="1">
+						<caption>Second Table </caption>
+						text1
+						<tr>
+							text2
+							<th> C0 R0 </th>
+							<th> C1 R0 </th>
+							<th> C2 R0 </th>
+							<th> C3 R0 </th>
+						</tr>
+						<tr>
+							<td rowspan="4"> C0 R1 </td>
+							<td> C1 R1 </td>
+							<td colspan="2"> C2 R1 </td>
+							<!-- <td> C3 R1 </td> -->
+						</tr>
+						<tr>
+							<!-- <td> C0 R2 </td> -->
+							<td rowspan="2" colspan="2"> C1 R2 </td>
+							<!-- <td> C2 R2 </td> -->
+							<td> C3 R2 </td>
+						</tr>
+						<tr>
+							<!-- <td> C0 R3 </td> -->
+							<!-- <td> C1 R3 </td> -->
+							<!-- <td> C2 R3 </td> -->
+							<td rowspan="2"> C3 R3 </td>
+						</tr>
+						<tr>
+							<!-- <td> C0 R4 </td> -->
+							<td> C1 R4 </td>
+							<td> C2 R4 </td>
+							<!-- <td> C3 R4 </td> -->
+						</tr>
+					</table>
+				</td>
+				<td>
+					<img src="img/table.png">
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>МЗ-21 лекция 2 Column</title>
+		<meta name="keywords" content="HTML">
+		<meta name="description" content="HMTL">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="stylesheet" href="style/menu.css">
+		<link rel="stylesheet" href="style/footer.css">
+		<link rel="stylesheet" href="style/container.css">
+
+		<script src="js/jquery-3.7.1.min.js"></script>
+		<script src="js/header.js"></script>
+
+
+	</head>
+	<body>
+		<div id="header">
+
+		</div>
+
+		<div id="container">
+		    <div id="sidebar">
+		        <h1>jQuery</h1>
+		        <button id="getWeather">Weather</button>
+		        <button id="getPosition">Position</button>
+		        <br>
+		        <form id="settingsForm">
+		            <input type="number" id="latitude" name="latitude" placeholder="Latitude"><br>
+		            <input type="number" id="longitude" name="longitude" placeholder="Longitude"><br>
+		            <label>
+		                <input type="checkbox" name="hourly[]" value="temperature_2m" checked>
+		                Temperature (2 m)
+		            </label><br>
+		            <label>
+		                <input type="checkbox" name="hourly[]" value="relative_humidity_2m" checked>
+		                Relative Humidity (2 m)
+		            </label><br>
+		        </form>
+		    </div>
+		    <div id="content">
+		        <table id="weatherTable">
+		            <thead>
+		                <tr>
+		                    <th>Date and Time</th>
+		                    <th>Temperature</th>
+		                    <th>Relative Humidity</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            </tbody>
+		        </table>
+		    </div>
+		</div>
+
+
+		<div id="footer">
+			&copy;2023
+		</div>
+		<script src="js/jQuery.js"></script>
+	</body>
+</html>

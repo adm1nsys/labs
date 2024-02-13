@@ -1,0 +1,6 @@
+#footer {
+	/* border: 1px solid red; */
+	background-color: lightblue;
+	position: sticky;
+	bottom: 0px;
+}

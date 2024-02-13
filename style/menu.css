@@ -1,0 +1,36 @@
+#header {
+	/* border: 1px solid red; */
+	background-color: lightblue;
+	position: sticky;
+	top: 0px;
+}
+
+#EDUname {
+	margin-left: 50%;
+}
+
+#menu {
+	position: relative;
+	text-align: center;
+	padding-bottom: 5px;
+	min-width: 500px;
+}
+
+/* https://developer.mozilla.org/ru/docs/Web/CSS/Pseudo-classes */
+#menu a:hover {
+	color: black;
+}
+
+#menu a {
+	background: blue;
+	color: white;
+	text-decoration: none;
+	margin: 0 1px;
+	padding: 6px 10px 5px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#menu a.active {
+	color: black;
+}

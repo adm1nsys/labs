@@ -1,0 +1,103 @@
+/* наш стиль - class*/
+.pBlue {
+	color: blue;
+}
+.pRed {
+	color: red;
+}
+.pGreen {
+	color: green;
+}
+
+p {
+	/* by color name */
+	color: orange;
+	/* by HEX RGB
+		Red: 00..FF
+		Green: 00..FF
+		Blue: 00..FF
+	*/
+	color: #28C864;
+	/* by RGB
+		Red: 0..255
+		Green: 0..255
+		Blue: 0..255
+	*/
+	color: rgb(40,200,100);
+	
+	/* by RGBA
+		Red: 0..255
+		Green: 0..255
+		Blue: 0..255
+		Alpha: 0..1
+	*/
+	color: rgba(40,200,100,0.5);
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/font-family */
+	font-family: Blackadder ITC, Comic Sans MS;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/font-size */
+	/* px | pt | em  1em=12pt*/
+	font-size: 1em;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/font-weight */
+	font-weight: lighter;
+	/* none | underline | overline | line-through */
+	text-decoration: line-through;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/text-align */
+	/* Left | cEnter | Right | Justify */
+	text-align: justify;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/text-indent */
+	/* px | pt | em | % */
+	text-indent: 2em;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/line-height */
+	/* px | pt | em | % | ... */
+	line-height: 1.5;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/margin */
+	/* px | pt | em | % */
+	/* сверху  справа  снизу  слева */
+	margin: 10px 20px 30px 40px;
+	/* сверху  справа (слева) снизу   */
+	margin: 10px 20px 30px;
+	/* сверху (снизу) справа (слева)    */
+	margin: 10px 20px;
+	/* сверху  (справа  снизу  слева) */
+	margin: 10px;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/padding */
+	/* px | pt | em | % */
+	padding: 10px;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/border */
+	border: 2px solid red;
+	
+	border-top-color: red;
+	border-top-style: solid;
+	border-top-width: 2px;
+	
+	border-right-color: green;
+	border-right-style: dotted;
+	border-right-width: 4px;
+	
+	border-bottom-color: blue;
+	border-bottom-style: dashed;
+	border-bottom-width: 6px;
+	
+	border-left-color: purple;
+	border-left-style: double;
+	border-left-width: 8px;
+	/* px | pt | em | % */
+	border-radius: 10px;
+}
+/* by ID */
+#ul, #ol, img{
+	color: orange;
+	border: 2px solid red;
+	/* px | pt | em | % */
+	width: 20%;
+	/* px | pt | em */
+	height: 100px;
+	/* https://developer.mozilla.org/ru/docs/Web/CSS/overflow */
+	overflow: auto;
+}
+
+ul#ul li {
+	color: purple;
+	background-color: lightgreen;
+}
+

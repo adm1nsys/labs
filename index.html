@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- https://developer.mozilla.org/ru/docs/Learn/HTML/Introduction_to_HTML/Getting_started -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>МЗ-21 лекция 1</title>
+		<meta name="keywords" content="HTML">
+		<meta name="description" content="HMTL">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	</head>
+	<body>
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/A -->
+		<a href="http://hk.dut.edu.ua"> HK DUT This Window</a><br>
+		<a href="http://hk.dut.edu.ua" target="_blank"> HK DUT New Windows</a><br>
+		<a href="http://hk.dut.edu.ua" target="hkdut"> HK DUT New Window</a><br>
+		<hr>
+		<a href="#ul">UL</a><br>
+		<a href="#ol">OL</a><br>
+		<a href="#img">IMG</a><br>
+		<hr>
+		<a href="css.html">CSS</a><br>
+		<a href="table.html">table</a><br>
+		<a href="div.html">div</a><br>
+		<a href="menu.html">menu</a><br>
+		<a href="2Column.html">2 Column</a><br>
+		<a href="form.html">Form</a><br>
+		<a href="js-basic.html">JS</a><br>
+		<a href="calculator.html">calculator</a><br>
+		<hr>
+		МЗ-21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;первая страница
+		<myTag [id] [name] [attributes]>My test tag</myTag>
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/hr -->
+		<hr color="green" size="10px" width="33%">
+		
+		<b>Bold</b><br>
+		<i>Italic</i><br>
+		<u>UnderLine</u><br>
+		X<sub>2</sub><br>
+		Y<sup>2</sup></br>
+		<br>
+		<b>Bold <i>Italic <u>UnderLine</u></i></b><br>
+		Y<sup>2<sup>2<sup>2<sup>2</sup></sup></sup></sup></br>
+		<!-- https://ru.wikipedia.org/wiki/%D0%9C%D0%BD%D0%B5%D0%BC%D0%BE%D0%BD%D0%B8%D0%BA%D0%B8_%D0%B2_HTML -->
+		
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Heading_Elements -->
+		<h1>Активное изучение: Добавление атрибутов в элемент</h1>
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/p -->
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/span -->
+		<p>
+			Возьмём для примера элемент &lt;a&gt; — означает anchor (<span>якорь</span>) и делает текст внутри него гиперссылкой. Может иметь несколько атрибутов, вот несколько из них:
+		</p>
+		<p>
+			<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/br -->
+			href<br>
+	
+			В значении этого атрибута прописывается веб-адрес, на который, по вашей задумке, должна указывать ссылка, куда браузер переходит, когда вы по ней кликаете. Например, href="https://www.mozilla.org/".
+		</p>
+		<p>
+			title<br>
+	
+			Атрибут title описывает дополнительную информацию о ссылке, такую как: на какую страницу она ведёт. Например, title="The Mozilla homepage". Она появится в виде всплывающей подсказки, когда вы наведёте курсор на ссылку.
+		</p>
+		<hr>
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/ul -->
+		<ul id="ul">
+			<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/li -->
+			<li>Барибін Ярослав Віталійович</li>
+			<li>Бєлов Дмитро Євгенійович</li>
+			<li>Вовк Данило Дмитрович</li>
+			<li>Воронцов Алім Хасанович</li>
+			<li>Гао Нікіта Цзюнь</li>
+			<li>Глушко Віталій Романович</li>
+			<li>Дробан Денис Олександрович</li>
+			<li>Дубина Михайло Юрійович</li>
+			<li>Кутєпов Данило Євгенович</li>
+			<li>Лещенко Микита Вікторович</li>
+			<li>Михайлов Кирило Романович</li>
+			<li>П’ятовський Данило Дмитрович</li>
+			<li>Пахомов Семен Олександрович</li>
+			<li>Пащенко Нікіта Сергійович</li>
+			<li>Романенко Георгій Олександрович</li>
+			<li>Руденко Микола Олександрович</li>
+			<li>Сарічев Олег Романович</li>
+			<li>Севостьянов Артем Юрійович</li>
+			<li>Скобля Антон Анатолійович </li>
+			<li>Федяшин Кирило Олександрович</li>
+			<li>Фунтов Микита Вячеславович</li>
+			<li>Чернишов Максим Олександрович</li>
+			<li>Шадура Владислав Дмитрович</li>
+		</ul>
+		<hr>
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/ol -->
+		<ol id="ol" type="I">
+			<li>
+				Барибін Ярослав Віталійович
+				<ul>
+					<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/li -->
+					<li>Барибін Ярослав Віталійович</li>
+					<li>Бєлов Дмитро Євгенійович</li>
+					<li>Вовк Данило Дмитрович</li>
+					<li>Воронцов Алім Хасанович</li>
+					<li>Гао Нікіта Цзюнь</li>
+				</ul>
+			</li>
+			<li>Бєлов Дмитро Євгенійович</li>
+			<li>Вовк Данило Дмитрович</li>
+			<li>Воронцов Алім Хасанович</li>
+			<li>Гао Нікіта Цзюнь</li>
+			<li>Глушко Віталій Романович</li>
+			<li>Дробан Денис Олександрович</li>
+			<li>Дубина Михайло Юрійович</li>
+			<li>Кутєпов Данило Євгенович</li>
+			<li>Лещенко Микита Вікторович</li>
+			<li>Михайлов Кирило Романович</li>
+			<li>П’ятовський Данило Дмитрович</li>
+			<li>Пахомов Семен Олександрович</li>
+			<li>Пащенко Нікіта Сергійович</li>
+			<li>Романенко Георгій Олександрович</li>
+			<li>Руденко Микола Олександрович</li>
+			<li>Сарічев Олег Романович</li>
+			<li>Севостьянов Артем Юрійович</li>
+			<li>Скобля Антон Анатолійович </li>
+			<li>Федяшин Кирило Олександрович</li>
+			<li>Фунтов Микита Вячеславович</li>
+			<li>Чернишов Максим Олександрович</li>
+			<li>Шадура Владислав Дмитрович</li>
+		</ol>
+		<hr id="img">
+		<!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/img -->
+		<img src="/media/cc0-images/grapefruit-slice-332-332.jpg" alt="Grapefruit slice atop a pile of other slices">
+		<img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt="Grapefruit slice atop a pile of other slices">
+		<img src="img/photo_2022-08-28_05-30-29 (2).jpg" alt="бавовнятко">
+	</body>
+</html>

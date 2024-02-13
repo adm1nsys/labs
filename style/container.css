@@ -1,0 +1,18 @@
+#container, #sidebar, #content {
+	/* border: 1px solid red; */
+	min-height: 400px;
+}
+
+#container {
+	display: flex;
+}
+
+#sidebar, #content {
+	min-width: 200px;
+	float: left;
+	padding: 10px;
+}
+
+#sidebar {
+	max-width: 300px;
+}
