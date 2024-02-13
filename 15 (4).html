@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>МЗ-21 лекція 2 Column</title>
+		<meta name="keywords" content="HTML">
+		<meta name="description" content="HMTL">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="stylesheet" href="style/menu.css">
+		<link rel="stylesheet" href="style/footer.css">
+		<link rel="stylesheet" href="style/container.css">
+		<style>
+			.table15 td {
+				width: 30px;
+				height: 30px;
+				border: 1px solid black;
+				border-radius: 50px;
+				cursor: pointer;
+				text-align: center;
+			}
+			.table15 td:hover {
+				background-color: lightgrey;
+			}
+			.rightPosition {
+				background-color: lightgreen;
+			}
+			.buttonPause {
+				height: 20px;
+				width: 50px;
+				background: red;
+				position: fixed;
+				left: 26px;
+				top: 33px;
+				display: none;
+			}
+			.buttonResume {
+				height: 20px;
+				width: 65px;
+				background: green;
+				position: fixed;
+				right: 26px;
+				top: 33px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<h2 id="EDUname"> 
+				ВСП Харківський фаховий коледж<br>
+				інформаційних технологій<br>
+				Національного аерокосмічного<br>
+				університету "ХАІ"<br>
+			</h2>
+			<div id="menu">
+				<a href="index.html">index</a>
+				<a href="css.html">CSS</a>
+				<a href="table.html">table</a>
+				<a href="div.html">div</a>
+				<a href="menu.html">menu</a>
+				<a href="2Column.html">2 Column</a>
+				<a href="form.html">Form</a>
+				<a href="js-basic.html">JS</a>
+				<a href="calculator.html">calculator</a>
+				<a href="calculator2.html" >calculator2</a>
+				<a href="15.html" class="active">15</a>
+			</div>
+		</div>
+		
+		<div id="container">
+			<div id="sidebar">
+				<input type="number" value="4" min="2" max="10" id="iFieldSize"><br>
+				<input type="button" value="Start Game" id="bStartGame"><br>
+				<hr>
+				Ходи: <span id="movesCount">0</span><br>
+				Час гри: <span id="gameTime">00:00.0</span><br>
+			</div>
+			<div id="content">
+				<div id="pauseb" class="buttonPause">PAUSE</div>
+				<div id="resumeb" class="buttonResume">RESUME</div>
+				<div id="gameField"></div>
+				<div id="gameRecords"></div>
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy;2023
+		</div>
+		<script src="js/15 (4).js"></script>
+	</body>
+</html>

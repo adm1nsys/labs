@@ -3,9 +3,10 @@ $(document).ready(function() {
     $("#getPosition").on('click', getPosition);
 });
 
+console.log("Закройте консоль пожалуйста")
+
 function getWeather() {
-    // Формируем строку с параметрами, основываясь на состоянии чекбоксов
-    var params = $("#settingsForm").serialize() + "&daily=sunrise,sunset,precipitation_sum&timezone=auto";
+    var params = $("#settingsForm").serialize() + "&timezone=auto";
 
     $.ajax({
         method: 'GET',
@@ -14,38 +15,39 @@ function getWeather() {
         dataType: 'json',
         timeout: 5000,
         success: function (data) {
-            console.info(data);
-            let weatherTableBody = $("#weatherTable tbody");
-            weatherTableBody.empty(); // Очистить текущие строки таблицы
+            console.log(data);
 
-            // Проверяем, какие данные доступны и добавляем их в таблицу
+            let weatherTableBody = $("#weatherTable tbody");
+            weatherTableBody.empty();
+
             if(data.hourly && data.hourly.time) {
                 data.hourly.time.forEach((time, index) => {
                     let row = `<tr><td>${time}</td>`;
 
-                    if ($("input[name='hourly[]'][value='temperature_2m']").is(':checked')) {
-                        let temperature = data.hourly.temperature_2m[index];
-                        row += `<td>${temperature} °C</td>`;
-                    } else {
-                        row += `<td>N/A</td>`; // Если данные по температуре не запрошены
-                    }
-
-                    if ($("input[name='hourly[]'][value='relative_humidity_2m']").is(':checked')) {
-                        let humidity = data.hourly.relative_humidity_2m[index];
-                        row += `<td>${humidity} %</td>`;
-                    } else {
-                        row += `<td>N/A</td>`; // Если данные по влажности не запрошены
-                    }
+                    row += addDataToRow('temperature_2m', data, index);
+                    row += addDataToRow('relative_humidity_2m', data, index);
+                    row += addDataToRow('rain', data, index);
+                    row += addDataToRow('cloud_cover', data, index);
+                    row += addDataToRow('wind_speed_10m', data, index);
 
                     row += `</tr>`;
-                    weatherTableBody.append(row); // Добавить строку в таблицу
+                    weatherTableBody.append(row);
                 });
             }
         },
         error: function (error) {
-            console.error(error);
+            console.error("Ошибка запроса к API погоды:", error);
         }
     });
+}
+
+function addDataToRow(parameter, data, index) {
+    if ($(`input[name='hourly[]'][value='${parameter}']`).is(':checked')) {
+        let value = data.hourly[parameter] ? data.hourly[parameter][index] : 'N/A';
+        return `<td>${value !== 'N/A' ? value : 'N/A'}</td>`;
+    } else {
+        return `<td>N/A</td>`;
+    }
 }
 
 function getPosition() {

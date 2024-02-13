@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>МЗ-21 лекция 2 Column</title>
+		<meta name="keywords" content="HTML">
+		<meta name="description" content="HMTL">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="stylesheet" href="style/menu.css">
+		<link rel="stylesheet" href="style/footer.css">
+		<link rel="stylesheet" href="style/container.css">
+	</head>
+	<body>
+		<div id="header">
+			<h2 id="EDUname"> 
+				ВСП Харківський фаховий коледж<br>
+				інформаційних технологій<br>
+				Національного аерокосмічного<br>
+				університету "ХАІ"<br>
+			</h2>
+			<div id="menu">
+				<a href="index.html">index</a>
+				<a href="css.html">CSS</a>
+				<a href="table.html">table</a>
+				<a href="div.html">div</a>
+				<a href="menu.html">menu</a>
+				<a href="2Column.html" class="active">2 Column</a>
+				<a href="form.html">Form</a>
+				<a href="js-basic.html">JS</a>
+			</div>
+		</div>
+		
+		<div id="container">
+			<div id="sidebar">
+				<h1>Содержание</h1>
+			</div>
+			<div id="content"><br>
+			Document.getElementsByClassName()<br>
+<br>
+The getElementsByClassName method of Document interface returns an array-like object of all child elements which have all of the given class name(s).<br>
+<br>
+When called on the document object, the complete document is searched, including the root node. You may also call getElementsByClassName() on any element; it will return only elements which are descendants of the specified root element with the given class name(s).<br>
+<br>
+Warning: This is a live HTMLCollection. Changes in the DOM will reflect in the array as the changes occur. If an element selected by this array no longer qualifies for the selector, it will automatically be removed. Be aware of this for iteration purposes.<br>
+Syntax<br>
+<br>
+getElementsByClassName(names)<br>
+<br>
+Parameters<br>
+<br>
+names<br>
+<br>
+    A string representing the class name(s) to match; multiple class names are separated by whitespace.<br>
+<br>
+Return value<br>
+<br>
+A live HTMLCollection of found elements.<br>
+Examples<br>
+<br>
+Get all elements that have a class of 'test':<br>
+<br>
+document.getElementsByClassName("test");<br>
+<br>
+Get all elements that have both the 'red' and 'test' classes:<br>
+<br>
+document.getElementsByClassName("red test");<br>
+<br>
+Get all elements that have a class of 'test', inside of an element that has the ID of 'main':<br>
+<br>
+document.getElementById("main").getElementsByClassName("test");<br>
+<br>
+Get the first element with a class of 'test', or undefined if there is no matching element:<br>
+<br>
+document.getElementsByClassName("test")[0];<br>
+<br>
+We can also use methods of Array.prototype on any HTMLCollection by passing the HTMLCollection as the method's this value. Here we'll find all div elements that have a class of 'test':<br>
+<br>
+const testElements = document.getElementsByClassName("test");<br>
+const testDivs = Array.prototype.filter.call(<br>
+  testElements,<br>
+  (testElement) => testElement.nodeName === "DIV"<br>
+);<br>
+<br>
+Get the first element whose class is 'test'<br>
+<br>
+This is the most commonly used method of operation.
+<h1>Вернуться к содержанию</h1>
+
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy;2023
+		</div>
+	</body>
+</html>

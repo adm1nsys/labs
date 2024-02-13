@@ -29,25 +29,40 @@
 		        <form id="settingsForm">
 		            <input type="number" id="latitude" name="latitude" placeholder="Latitude"><br>
 		            <input type="number" id="longitude" name="longitude" placeholder="Longitude"><br>
-		            <label>
-		                <input type="checkbox" name="hourly[]" value="temperature_2m" checked>
-		                Temperature (2 m)
-		            </label><br>
-		            <label>
-		                <input type="checkbox" name="hourly[]" value="relative_humidity_2m" checked>
-		                Relative Humidity (2 m)
-		            </label><br>
+								<label>
+								    <input type="checkbox" name="hourly[]" value="temperature_2m" checked>
+								    Temperature (2 m)
+								</label><br>
+								<label>
+								    <input type="checkbox" name="hourly[]" value="relative_humidity_2m" checked>
+								    Relative Humidity (2 m)
+								</label><br>
+								<label>
+								    <input type="checkbox" name="hourly[]" value="rain">
+								    Rain
+								</label><br>
+								<label>
+								    <input type="checkbox" name="hourly[]" value="cloud_cover">
+								    Cloud Cover Total
+								</label><br>
+								<label>
+								    <input type="checkbox" name="hourly[]" value="wind_speed_10m">
+								    Wind Speed (10 m)
+								</label><br>
 		        </form>
 		    </div>
 		    <div id="content">
 		        <table id="weatherTable">
-		            <thead>
-		                <tr>
-		                    <th>Date and Time</th>
-		                    <th>Temperature</th>
-		                    <th>Relative Humidity</th>
-		                </tr>
-		            </thead>
+							<thead>
+								<tr>
+										<th>Date and Time</th>
+										<th>Temperature</th>
+										<th>Relative Humidity</th>
+										<th>Rain</th>
+										<th>Cloud Cover</th>
+										<th>Wind Speed (10 m)</th>
+								</tr>
+							</thead>
 		            <tbody>
 		            </tbody>
 		        </table>
