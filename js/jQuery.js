@@ -1,45 +1,69 @@
 $(document).ready(function() {
-    $("#getWeather").on('click', getWeather);
+    $("#getWeather").on('click', function() {
+        createTable(); // Создаем таблицу динамически в зависимости от выбранных параметров
+        getWeather();
+    });
     $("#getPosition").on('click', getPosition);
 });
 
-console.log("Закройте консоль пожалуйста")
+function createTable() {
+    // Очистить предыдущую таблицу, если она существует
+    $("#weatherTable").remove();
+
+    // Создаем новую таблицу
+    var table = $('<table id="weatherTable"><thead><tr></tr></thead><tbody></tbody></table>');
+    var headerRow = table.find("thead tr");
+
+    // Всегда добавляем колонку с датой и временем
+    headerRow.append("<th>Date and Time</th>");
+
+    // Добавляем колонки для выбранных параметров
+    $("input[name='hourly[]']:checked").each(function() {
+        var paramName = $(this).parent().text().trim();
+        headerRow.append("<th>" + paramName + "</th>");
+    });
+
+    // Добавляем таблицу на страницу
+    $("#content").append(table);
+}
 
 function getWeather() {
-    var params = $("#settingsForm").serialize() + "&timezone=auto";
+    var params = $("#settingsForm").serialize();
 
     $.ajax({
         method: 'GET',
         url: 'https://api.open-meteo.com/v1/forecast',
         data: params,
         dataType: 'json',
-        timeout: 5000,
         success: function (data) {
-            console.log(data);
-
-            let weatherTableBody = $("#weatherTable tbody");
-            weatherTableBody.empty();
-
-            if(data.hourly && data.hourly.time) {
-                data.hourly.time.forEach((time, index) => {
-                    let row = `<tr><td>${time}</td>`;
-
-                    row += addDataToRow('temperature_2m', data, index);
-                    row += addDataToRow('relative_humidity_2m', data, index);
-                    row += addDataToRow('rain', data, index);
-                    row += addDataToRow('cloud_cover', data, index);
-                    row += addDataToRow('wind_speed_10m', data, index);
-
-                    row += `</tr>`;
-                    weatherTableBody.append(row);
-                });
-            }
+            console.log("Полученные данные о погоде:", data);
+            updateTable(data); // Обновляем таблицу данными
         },
         error: function (error) {
             console.error("Ошибка запроса к API погоды:", error);
         }
     });
 }
+
+function updateTable(data) {
+    if (!data.hourly || !data.hourly.time) return;
+
+    var tableBody = $("#weatherTable tbody");
+    data.hourly.time.forEach((time, index) => {
+        var row = $("<tr></tr>");
+        row.append("<td>" + time + "</td>"); // Добавляем время
+
+        // Для каждого выбранного параметра добавляем данные в строку
+        $("input[name='hourly[]']:checked").each(function() {
+            var parameter = $(this).val();
+            var value = data.hourly[parameter][index];
+            row.append("<td>" + (value != null ? value : 'N/A') + "</td>");
+        });
+
+        tableBody.append(row);
+    });
+}
+
 
 function addDataToRow(parameter, data, index) {
     if ($(`input[name='hourly[]'][value='${parameter}']`).is(':checked')) {
