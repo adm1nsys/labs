@@ -1,29 +1,24 @@
 $(document).ready(function() {
     $("#getWeather").on('click', function() {
-        createTable(); // Создаем таблицу динамически в зависимости от выбранных параметров
+        createTable();
         getWeather();
     });
     $("#getPosition").on('click', getPosition);
 });
 
 function createTable() {
-    // Очистить предыдущую таблицу, если она существует
     $("#weatherTable").remove();
 
-    // Создаем новую таблицу
     var table = $('<table id="weatherTable"><thead><tr></tr></thead><tbody></tbody></table>');
     var headerRow = table.find("thead tr");
 
-    // Всегда добавляем колонку с датой и временем
     headerRow.append("<th>Date and Time</th>");
 
-    // Добавляем колонки для выбранных параметров
     $("input[name='hourly[]']:checked").each(function() {
         var paramName = $(this).parent().text().trim();
         headerRow.append("<th>" + paramName + "</th>");
     });
 
-    // Добавляем таблицу на страницу
     $("#content").append(table);
 }
 
@@ -37,7 +32,7 @@ function getWeather() {
         dataType: 'json',
         success: function (data) {
             console.log("Полученные данные о погоде:", data);
-            updateTable(data); // Обновляем таблицу данными
+            updateTable(data);
         },
         error: function (error) {
             console.error("Ошибка запроса к API погоды:", error);
@@ -51,9 +46,8 @@ function updateTable(data) {
     var tableBody = $("#weatherTable tbody");
     data.hourly.time.forEach((time, index) => {
         var row = $("<tr></tr>");
-        row.append("<td>" + time + "</td>"); // Добавляем время
+        row.append("<td>" + time + "</td>");
 
-        // Для каждого выбранного параметра добавляем данные в строку
         $("input[name='hourly[]']:checked").each(function() {
             var parameter = $(this).val();
             var value = data.hourly[parameter][index];
