@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>МЗ-21 лекция 2 Column Vue</title>
+    <script src="https://unpkg.com/vue@2"></script>
+    <style>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        input[type="number"] {
+            width: 120px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar">
+            <h1>Vue Weather App</h1>
+            <button @click="getPosition">Get Position</button>
+            <button @click="getWeather">Get Weather</button>
+            <form @submit.prevent="getWeather">
+                <input type="number" v-model.number="latitude" placeholder="Latitude" required>
+                <input type="number" v-model.number="longitude" placeholder="Longitude" required>
+                <input type="number" v-model.number="pastDays" placeholder="Days in the past (0-90)" min="0" max="90">
+                <input type="number" v-model.number="futureDays" placeholder="Days in the future (0-16)" min="0" max="16">
+                <div v-for="option in options" :key="option.value">
+                    <input type="checkbox" :id="option.value" :value="option.value" v-model="selectedOptions">
+                    <label :for="option.value">{{ option.text }}</label>
+                </div>
+                <button type="submit">Get Weather</button>
+            </form>
+        </div>
+        <div id="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date and Time</th>
+                        <th v-if="isSelected('temperature_2m')">Temperature (2m)</th>
+                        <th v-if="isSelected('relative_humidity_2m')">Humidity (2m)</th>
+                        <th v-if="isSelected('rain')">Rain</th>
+                        <th v-if="isSelected('cloudcover')">Cloud Cover</th>
+                        <th v-if="isSelected('windspeed_10m')">Wind Speed (10m)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(record, index) in weatherData" :key="index">
+                        <td>{{ record.time }}</td>
+                        <td v-if="isSelected('temperature_2m')">{{ record.temperature }} °C</td>
+                        <td v-if="isSelected('relative_humidity_2m')">{{ record.humidity }} %</td>
+                        <td v-if="isSelected('rain')">{{ record.rain }} mm</td>
+                        <td v-if="isSelected('cloudcover')">{{ record.cloudCover }} %</td>
+                        <td v-if="isSelected('windspeed_10m')">{{ record.windSpeed }} km/h</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                latitude: '',
+                longitude: '',
+                pastDays: 0,
+                futureDays: 0,
+                weatherData: [],
+                options: [
+                    { value: 'temperature_2m', text: 'Temperature (2m)' },
+                    { value: 'relative_humidity_2m', text: 'Relative Humidity (2m)' },
+                    { value: 'rain', text: 'Rain' },
+                    { value: 'cloudcover', text: 'Cloud Cover' },
+                    { value: 'windspeed_10m', text: 'Wind Speed (10m)' }
+                ],
+                selectedOptions: ['temperature_2m', 'relative_humidity_2m', 'rain', 'cloudcover', 'windspeed_10m']
+            },
+            methods: {
+                getWeather() {
+                    const hourlyParams = this.selectedOptions.join(',');
+                    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${this.latitude}&longitude=${this.longitude}&hourly=${hourlyParams}&start=-${this.pastDays}d&end=+${this.futureDays}d`;
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.weatherData = [];
+                            if (data.hourly && data.hourly.time) {
+                                for (let i = 0; i < data.hourly.time.length; i++) {
+                                    const time = data.hourly.time[i];
+                                    this.weatherData.push({
+                                        time: time,
+                                        temperature: data.hourly.temperature_2m ? data.hourly.temperature_2m[i] + ' °C' : 'N/A',
+                                        humidity: data.hourly.relative_humidity_2m ? data.hourly.relative_humidity_2m[i] + ' %' : 'N/A',
+                                        rain: data.hourly.rain ? data.hourly.rain[i] + ' mm' : 'N/A',
+                                        cloudCover: data.hourly.cloudcover ? data.hourly.cloudcover[i] + ' %' : 'N/A',
+                                        windSpeed: data.hourly.windspeed_10m ? data.hourly.windspeed_10m[i] + ' km/h' : 'N/A',
+                                    });
+                                }
+                            }
+                        })
+                        .catch(error => console.error('Error fetching weather data:', error));
+                },
+                getPosition() {
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(position => {
+                            this.latitude = position.coords.latitude;
+                            this.longitude = position.coords.longitude;
+                        }, error => console.error("Error getting the position:", error));
+                    } else {
+                        console.error("Geolocation is not supported by this browser.");
+                    }
+                },
+                isSelected(option) {
+                    return this.selectedOptions.includes(option);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
