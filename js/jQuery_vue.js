@@ -1,95 +1,56 @@
-$(document).ready(function() {
-    $("#getWeather").on('click', function() {
-        createTable();
-        getWeather();
-    });
-    $("#getPosition").on('click', getPosition);
-});
-
-function createTable() {
-    $("#weatherTable").remove();
-
-    var table = $('<table id="weatherTable"><thead><tr></tr></thead><tbody></tbody></table>');
-    var headerRow = table.find("thead tr");
-
-    headerRow.append("<th>Date and Time</th>");
-
-    $("input[name='hourly[]']:checked").each(function() {
-        var paramName = $(this).parent().text().trim();
-        headerRow.append("<th>" + paramName + "</th>");
-    });
-
-    $("#content").append(table);
-}
-
-function getWeather() {
-    var params = $("#settingsForm").serialize();
-
-    $.ajax({
-        method: 'GET',
-        url: 'https://api.open-meteo.com/v1/forecast',
-        data: params,
-        dataType: 'json',
-        success: function (data) {
-            console.log("Полученные данные о погоде:", data);
-            updateTable(data);
+new Vue({
+    el: '#app',
+    data: {
+        latitude: '',
+        longitude: '',
+        pastDays: 0,
+        futureDays: 0,
+        weatherData: [],
+        options: [
+            { value: 'temperature_2m', text: 'Temperature (2m)' },
+            { value: 'relative_humidity_2m', text: 'Relative Humidity (2m)' },
+            { value: 'rain', text: 'Rain' },
+            { value: 'cloudcover', text: 'Cloud Cover' },
+            { value: 'windspeed_10m', text: 'Wind Speed (10m)' }
+        ],
+        selectedOptions: ['temperature_2m', 'relative_humidity_2m', 'rain', 'cloudcover', 'windspeed_10m']
+    },
+    methods: {
+        getWeather() {
+            const hourlyParams = this.selectedOptions.join(',');
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${this.latitude}&longitude=${this.longitude}&hourly=${hourlyParams}&start=-${this.pastDays}d&end=+${this.futureDays}d`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    this.weatherData = [];
+                    if (data.hourly && data.hourly.time) {
+                        for (let i = 0; i < data.hourly.time.length; i++) {
+                            const time = data.hourly.time[i];
+                            this.weatherData.push({
+                                time: time,
+                                temperature: data.hourly.temperature_2m ? data.hourly.temperature_2m[i] + ' °C' : 'N/A',
+                                humidity: data.hourly.relative_humidity_2m ? data.hourly.relative_humidity_2m[i] + ' %' : 'N/A',
+                                rain: data.hourly.rain ? data.hourly.rain[i] + ' mm' : 'N/A',
+                                cloudCover: data.hourly.cloudcover ? data.hourly.cloudcover[i] + ' %' : 'N/A',
+                                windSpeed: data.hourly.windspeed_10m ? data.hourly.windspeed_10m[i] + ' km/h' : 'N/A',
+                            });
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
         },
-        error: function (error) {
-            console.error("Ошибка запроса к API погоды:", error);
+        getPosition() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    this.latitude = position.coords.latitude;
+                    this.longitude = position.coords.longitude;
+                }, error => console.error("Error getting the position:", error));
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        },
+        isSelected(option) {
+            return this.selectedOptions.includes(option);
         }
-    });
-}
-
-function updateTable(data) {
-    if (!data.hourly || !data.hourly.time) return;
-
-    var tableBody = $("#weatherTable tbody");
-    data.hourly.time.forEach((time, index) => {
-        var row = $("<tr></tr>");
-        row.append("<td>" + time + "</td>");
-
-        $("input[name='hourly[]']:checked").each(function() {
-            var parameter = $(this).val();
-            var value = data.hourly[parameter][index];
-            row.append("<td>" + (value != null ? value : 'N/A') + "</td>");
-        });
-
-        tableBody.append(row);
-    });
-}
-
-
-function addDataToRow(parameter, data, index) {
-    if ($(`input[name='hourly[]'][value='${parameter}']`).is(':checked')) {
-        let value = data.hourly[parameter] ? data.hourly[parameter][index] : 'N/A';
-        return `<td>${value !== 'N/A' ? value : 'N/A'}</td>`;
-    } else {
-        return `<td>N/A</td>`;
     }
-}
-
-function getPosition() {
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-    };
-
-    function success(pos) {
-        var crd = pos.coords;
-
-        console.log("Ваше текущее местоположение:");
-        console.log(`Широта: ${crd.latitude}`);
-        console.log(`Долгота: ${crd.longitude}`);
-        console.log(`Плюс-минус ${crd.accuracy} метров.`);
-
-        $('#latitude').val(crd.latitude);
-        $('#longitude').val(crd.longitude);
-    }
-
-    function error(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
-}
+});
